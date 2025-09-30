@@ -3,7 +3,7 @@ FROM node:20
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN npm install 
+RUN npm install;
 
 
 # Instala dockerize
@@ -16,8 +16,10 @@ RUN apt-get update \
 
 COPY . .
 
+
+EXPOSE 3000
+
+
 # Espera o MySQL ficar pronto antes de iniciar
 CMD ["dockerize", "-wait", "tcp://db:3306", "-timeout", "60s", "node", "index.js"]
 
-
-EXPOSE 3000
